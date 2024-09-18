@@ -16,6 +16,9 @@ public class Endereco {
 	@Column(name = "id")
 	private Long id;
 
+	@Column(name = "cep")
+	private String cep;
+	
 	@Column(name = "logradouro")
 	private String logradouro;
 
@@ -46,6 +49,14 @@ public class Endereco {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	public String getLogradouro() {

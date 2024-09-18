@@ -1,13 +1,13 @@
 package br.com.cnsoftware.sistema.model.entity.enums;
 
-public enum TipoContato {
+public enum TipoPessoa {
 
-	EMAIL("email"),
-	TELEFONE("telefone");
+	FISICA("fisica"),
+	JURIDICA("juridica");
 	
 	public String descricao;
 	
-	private TipoContato(String descricao) {
+	private TipoPessoa(String descricao) {
 		this.descricao = descricao;
 	}
 	

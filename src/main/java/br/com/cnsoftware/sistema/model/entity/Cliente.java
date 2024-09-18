@@ -2,8 +2,11 @@ package br.com.cnsoftware.sistema.model.entity;
 
 import java.time.LocalDate;
 import java.util.List;
+
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-import br.com.cnsoftware.sistema.model.entity.enums.Sexo;
+
+import br.com.cnsoftware.sistema.model.entity.enums.Genero;
+import br.com.cnsoftware.sistema.model.entity.enums.TipoPessoa;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -33,15 +36,19 @@ public class Cliente {
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
 
+	@Enumerated(value = EnumType.STRING)
+	@Column(name = "tipo_pessoa")
+	private TipoPessoa tipoPessoa;
+	
 	@Column(name = "cpf_cnpj")
-	private String cpfCNPJ;
+	private String cpfCnpj;
 
 	@Column(name = "rg")
 	private String rg;
 
 	@Enumerated(value = EnumType.STRING)
-	@Column(name = "sexo")
-	private Sexo sexo;
+	@Column(name = "genero")
+	private Genero genero;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_cliente")
@@ -60,22 +67,6 @@ public class Cliente {
 	
 	public Cliente() {
 		// TODO Auto-generated constructor stub
-	}
-
-	
-	public Cliente(Long id, String nome, LocalDate dataNascimento, String cpfCNPJ, String rg, Sexo sexo,
-			List<Endereco> enderecos, List<Contato> contatos, String login, String senha) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.dataNascimento = dataNascimento;
-		this.cpfCNPJ = cpfCNPJ;
-		this.rg = rg;
-		this.sexo = sexo;
-		this.enderecos = enderecos;
-		this.contatos = contatos;
-		this.login = login;
-		this.senha = senha;
 	}
 
 
@@ -103,12 +94,20 @@ public class Cliente {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getCpfCNPJ() {
-		return cpfCNPJ;
+	public TipoPessoa getTipoPessoa() {
+		return tipoPessoa;
 	}
 
-	public void setCpfCNPJ(String cpfCNPJ) {
-		this.cpfCNPJ = cpfCNPJ;
+	public void setTipoPessoa(TipoPessoa tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
+	}
+
+	public String getCpfCnpj() {
+		return cpfCnpj;
+	}
+
+	public void setCpfCnpj(String cpfCnpj) {
+		this.cpfCnpj = cpfCnpj;
 	}
 
 	public String getRg() {
@@ -119,12 +118,12 @@ public class Cliente {
 		this.rg = rg;
 	}
 
-	public Sexo getSexo() {
-		return sexo;
+	public Genero getGenero() {
+		return genero;
 	}
 
-	public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
+	public void setGenero(Genero genero) {
+		this.genero = genero;
 	}
 
 	public List<Endereco> getEnderecos() {
@@ -158,7 +157,5 @@ public class Cliente {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
-
 
 }
