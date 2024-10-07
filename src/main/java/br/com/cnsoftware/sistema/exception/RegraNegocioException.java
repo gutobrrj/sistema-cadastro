@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
 public class RegraNegocioException extends RuntimeException {
 	
-	private static final long serialVersionUID = 1L;
-
-	public RegraNegocioException(String mensagem) {
-		super(mensagem);
+	public RegraNegocioException(String message) {
+		super(message);
 	}
 }
