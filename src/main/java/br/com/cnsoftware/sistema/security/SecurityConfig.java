@@ -38,13 +38,11 @@ public class SecurityConfig {
                 		// Define o endpoint que não necessita de autenticação. Serão os endpoints que não passarão
                 		// pela classe Securityfilter que criamos
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()	// Permite metodo POST para o endpoint /auth/login
-                        .requestMatchers(HttpMethod.POST, "/auth/register").hasRole("ADMIN")	// Permite metodo POST para o endpoint /auth/register
+                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()	// Permite metodo POST para o endpoint /auth/register apenas quem possui a Role ADMIN
+//                        .requestMatchers(HttpMethod.POST, "/auth/register").hasRole("ADMIN")	// Permite metodo POST para o endpoint /auth/register apenas quem possui a Role ADMIN
                         .anyRequest().authenticated()	// Informa que qualquer outro Request precisa estar autenticado
-                )
-                
-                //.adicionaFiltroAntes - Diz para a aplicação aplicar e utilizar o filtro que criamos,
-                // ANTES, do filtro UsernamePasswordAuthenticationFilter
-                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class); 
+                        
+                ).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class); 	//Diz para a aplicação aplicar e utilizar o filtro que criamos, ANTES do filtro UsernamePasswordAuthenticationFilter
         
         return httpSecurity.build();
     }
@@ -56,6 +54,6 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    	return authenticationConfiguration.getAuthenticationManager();
     }
 }

@@ -1,4 +1,4 @@
-package br.com.cnsoftware.sistema.security;
+package br.com.cnsoftware.sistema.security.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cnsoftware.sistema.controller.dto.LoginRequestDTO;
 import br.com.cnsoftware.sistema.controller.dto.RegisterRequestDTO;
+import br.com.cnsoftware.sistema.security.service.AutenticacaoService;
 
 @RestController
 @RequestMapping("/auth")
 public class AutenticacaoController {
 
 	@Autowired
-	private AutorizacaoService autorizacaoService;
+	private AutenticacaoService autorizacaoService;
 	
 	
 	@PostMapping("/login")	
@@ -24,9 +25,9 @@ public class AutenticacaoController {
 	}
 	
 	
-//	@PostMapping("/register")	
-//	public ResponseEntity<Object> registrar( @RequestBody RegisterRequestDTO requestData ) {
-//		return autorizacaoService.registrar(requestData);
-//	}
+	@PostMapping("/register")	
+	public ResponseEntity<Object> registrar( @RequestBody RegisterRequestDTO requestData ) {
+		return autorizacaoService.register(requestData);
+	}
 	
 }

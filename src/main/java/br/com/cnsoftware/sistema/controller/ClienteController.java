@@ -19,13 +19,13 @@ public class ClienteController {
 	@Autowired
 	private ClienteService service;
 	
-	@PostMapping
+	@PostMapping("/salvar")
 	public ResponseEntity<Cliente> salvar( @RequestBody Cliente cliente) {
 		Cliente clienteSalvo = service.salvar(cliente);
 		return ResponseEntity.status(HttpStatus.CREATED).body(clienteSalvo);
 	}
 	
-	@GetMapping
+	@GetMapping("/clientes")
 	public ResponseEntity<List<Cliente>> listarTodos() {
 		List<Cliente> clientes = service.listarTodos();
 		return ResponseEntity.status(HttpStatus.OK).body(clientes);

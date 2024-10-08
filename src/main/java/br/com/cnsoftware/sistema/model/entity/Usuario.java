@@ -41,7 +41,7 @@ public class Usuario implements UserDetails {
 	private String senha;
 	
 	@Enumerated(value = EnumType.STRING)
-	@Column(name = "roles")
+	@Column(name = "role")
 	private RoleUsuario role;
 
 	

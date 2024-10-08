@@ -30,7 +30,6 @@ public class ClienteService {
 		}
 		
 		if(existeCpfCnpj) {
-			System.out.println("1");
 			throw new RegraNegocioException("CPF/CNPJ já cadastrado no  sistema.");
 		}
 		
