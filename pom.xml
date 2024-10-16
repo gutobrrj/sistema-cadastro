@@ -28,6 +28,7 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<modelmapper.version>3.0.0</modelmapper.version>
 	</properties>
 
 	<dependencies>
@@ -45,11 +46,25 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		<!--Spring Security - Segurança de acesso da aplicação, regras de privilégios, etc-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 
+		<!-- MySQL Driver - Necessário para conexão com o BD MySQL -->
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- ModelMapper - Biblioteca para converter entidades em DTO -->
+		<dependency>
+		  <groupId>org.modelmapper</groupId>
+		  <artifactId>modelmapper</artifactId>
+		  <version>${modelmapper.version}</version>
 		</dependency>
 
 		<!-- Bibliotec para criar os Tokens JWT -->
@@ -59,11 +74,7 @@
 			<version>4.4.0</version>
 		</dependency>
 
-		<!--Necessário para a segurança de acesso da aplicação, regras de privilégios, etc-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+		
 	</dependencies>
 
 	<build>
