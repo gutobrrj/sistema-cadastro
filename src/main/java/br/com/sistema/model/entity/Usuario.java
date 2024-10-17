@@ -60,7 +60,7 @@ public class Usuario implements UserDetails, Serializable {
 
 	
 	public Usuario() {
-		// TODO Auto-generated constructor stub
+		// TODO Auto-generated constructor
 	}
 
 	
