@@ -1,25 +1,27 @@
 package br.com.sistema.model.entity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.com.sistema.model.entity.enums.RoleUsuario;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuario") // Implementa a classe UserDetails do Spring Security para identificar uma classe de usuário que será autenticada na aplicação
-public class Usuario implements UserDetails {
+public class Usuario implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -40,16 +42,71 @@ public class Usuario implements UserDetails {
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	@Enumerated(value = EnumType.STRING)
-	@Column(name = "role")
-	private RoleUsuario role;
+	@Column(name = "account_non_expired")
+	private Boolean accountNonExpired;
+
+	@Column(name = "account_non_locked")
+	private Boolean accountNonLocked;
+
+	@Column(name = "credentials_non_expired")
+	private Boolean credentialsNonExpired;
+
+	@Column(name = "enabled")
+	private Boolean enabled;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "user_permission", joinColumns = {@JoinColumn(name = "id_usuario")}, inverseJoinColumns = {@JoinColumn(name = "id_permision")})
+	private List<Permission> permissions;
 
 	
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
+
 	
-	
+	public List<String> getRoles() {
+		List<String> roles = new ArrayList<>();
+		for (Permission permission : permissions) {
+			roles.add(permission.getDescription());
+		}
+		return roles;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.permissions;
+	}
+
+	@Override
+	public String getPassword() {
+		return this.password;
+	}
+
+	@Override
+	public String getUsername() {
+		return this.username;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return this.accountNonExpired;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return this.accountNonLocked;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return this.credentialsNonExpired;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return this.enabled;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -74,42 +131,52 @@ public class Usuario implements UserDetails {
 		this.email = email;
 	}
 
-	public String getUsername() {
-		return username;
+	public Boolean getAccountNonExpired() {
+		return accountNonExpired;
+	}
+
+	public void setAccountNonExpired(Boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	public Boolean getAccountNonLocked() {
+		return accountNonLocked;
+	}
+
+	public void setAccountNonLocked(Boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+
+	public Boolean getCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+
+	public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public List<Permission> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<Permission> permissions) {
+		this.permissions = permissions;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public RoleUsuario getRole() {
-		return role;
-	}
-
-	public void setRole(RoleUsuario role) {
-		this.role = role;
-	}
-
-
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-
-		// Se o usuário for do tipo enum Admin, então o usuário receberá uma lista com todas as ROLES, para obter todas as permissões
-		if (this.role == RoleUsuario.ADMIN)
-			return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-
-		// Caso contrário, se o usuário não for Admin, apenas a role de usuário é atribuída.
-		else
-			return List.of(new SimpleGrantedAuthority("ROLE_USER"));
 	}
 
 }
