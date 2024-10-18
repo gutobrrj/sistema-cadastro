@@ -29,6 +29,13 @@ public class TratamentoExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);	// Retonar a classe modelo preenchida e o StatusCode do erro
 	}
 	
+	@ExceptionHandler(AutenticacaoJwtInvalidaException.class)
+    public ResponseEntity<ExceptionResponse> handleAutenticacaoJwtInvalidaException(Exception ex, WebRequest request) {
+		logger.error(null, ex);
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+	
 	
 	@ExceptionHandler(UsuarioNaoEncontradoException.class)
     public ResponseEntity<ExceptionResponse> handleUsuarioNaoEncontradoException(Exception ex, WebRequest request) {
