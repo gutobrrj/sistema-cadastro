@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.sistema.repository.UsuarioRepository;
 
 @Service
-public class UsuarioService implements UserDetailsService {
+public class UsuarioService implements UserDetailsService { // Classe que implementa a interface UserDetailsService para carregar os detalhes do usuário para autenticação
 	
 	private Logger logger = Logger.getLogger(UsuarioService.class.getName());
 
@@ -25,15 +25,16 @@ public class UsuarioService implements UserDetailsService {
 	
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		logger.info("Buscando pelo usuário: " + username);
-		var user = usuarioRepository.findByUsername(username);
-		if(user != null) {
-			return user;
-		} else {
-			throw new UsernameNotFoundException("Usuário " + username + " não encontrado");
-		}
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { // Método que busca um usuário pelo nome de usuário e retorna os detalhes do usuário
+	    logger.info("loadUserByUsername: Buscando pelo usuário: " + username); // Registra no log que está buscando pelo usuário com o nome fornecido
+	    var user = usuarioRepository.findByUsername(username); // Faz uma consulta ao repositório de usuários para encontrar o usuário pelo nome de usuário
+	    if(user != null) { // Verifica se o usuário foi encontrado (não é nulo)
+	        return user; // Retorna os detalhes do usuário se ele foi encontrado
+	    } else { // Se o usuário não foi encontrado
+	        throw new UsernameNotFoundException("Usuário " + username + " não encontrado"); // Lança uma exceção indicando que o usuário não foi encontrado
+	    }
 	}
+
     
 
 }

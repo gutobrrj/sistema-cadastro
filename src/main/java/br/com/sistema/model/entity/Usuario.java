@@ -55,7 +55,8 @@ public class Usuario implements UserDetails, Serializable {
 	private Boolean enabled;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "user_permission", joinColumns = {@JoinColumn(name = "id_usuario")}, inverseJoinColumns = {@JoinColumn(name = "id_permision")})
+	@JoinTable(name = "user_permission", joinColumns = {@JoinColumn (name = "id_user")}, 
+		inverseJoinColumns = {@JoinColumn(name = "id_permission")})
 	private List<Permission> permissions;
 
 	

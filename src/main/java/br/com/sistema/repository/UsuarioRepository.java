@@ -14,7 +14,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
 	Optional<Usuario> findByEmail(String email);
 	
-	@Query("SELECT u FROM Usuario WHERE u.username =:username")	//JPQL que busca um usuário no BD. Não é necessário utilizar. Utilizamos apenas para praticar.
+	@Query("SELECT u FROM Usuario u WHERE u.username =:username")	//JPQL que busca um usuário no BD. Não é necessário utilizar. Utilizamos apenas para praticar.
 	Usuario findByUsername(@Param("username") String username);
 	
 //	Optional<Usuario> findByUsername(String username);
