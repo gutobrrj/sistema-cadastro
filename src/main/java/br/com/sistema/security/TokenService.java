@@ -21,7 +21,6 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 
 import br.com.sistema.dto.security.TokenResponseDto;
-import br.com.sistema.exceptions.AutenticacaoJwtInvalidaException;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -108,7 +107,7 @@ public class TokenService {
 	        }
 	        return true; // Retorna true se o token for válido
 	    } catch (Exception e) {
-	        throw new AutenticacaoJwtInvalidaException("Token inválido ou expirado"); // Lança uma exceção se houver algum problema na validação do token
+	        throw new RuntimeException("Token inválido ou expirado"); // Lança uma exceção se houver algum problema na validação do token
 	    }
 	}
 	
