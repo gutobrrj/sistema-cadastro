@@ -29,7 +29,7 @@ public class TokenService {
 
 	private Logger logger = Logger.getLogger(TokenService.class.getName());
 	
-	@Value("${security.jwt.token.secret-key}") // Pega o valor da key definido no arquivo application.properties 
+	@Value("${security.api.token.secret}") // Pega o valor da key definido no arquivo application.properties 
 	private String secretKey;
 
 	@Autowired
