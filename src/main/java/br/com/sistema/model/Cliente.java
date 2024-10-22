@@ -1,12 +1,12 @@
-package br.com.sistema.model.entity;
+package br.com.sistema.model;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
-import br.com.sistema.model.entity.enums.Genero;
-import br.com.sistema.model.entity.enums.TipoPessoa;
+import br.com.sistema.model.enums.Genero;
+import br.com.sistema.model.enums.TipoPessoa;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;

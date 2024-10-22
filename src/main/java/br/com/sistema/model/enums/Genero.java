@@ -1,4 +1,4 @@
-package br.com.sistema.model.entity.enums;
+package br.com.sistema.model.enums;
 
 public enum Genero {
 	

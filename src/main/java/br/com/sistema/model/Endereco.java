@@ -1,4 +1,4 @@
-package br.com.sistema.model.entity;
+package br.com.sistema.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

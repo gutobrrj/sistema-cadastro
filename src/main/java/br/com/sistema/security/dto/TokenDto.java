@@ -1,4 +1,4 @@
-package br.com.sistema.dto.security;
+package br.com.sistema.security.dto;
 
 import java.io.Serializable;
 import java.util.Date;

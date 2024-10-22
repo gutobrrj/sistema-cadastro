@@ -1,3 +1,3 @@
-package br.com.sistema.dto.security;
+package br.com.sistema.security.dto;
 
 public record LoginRequestDTO(String username, String password) {}

@@ -1,4 +1,4 @@
-package br.com.sistema.service;
+package br.com.sistema.security.service;
 
 import java.util.logging.Logger;
 

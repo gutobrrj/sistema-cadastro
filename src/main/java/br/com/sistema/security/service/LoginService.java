@@ -1,4 +1,4 @@
-package br.com.sistema.service;
+package br.com.sistema.security.service;
 
 import java.util.logging.Logger;
 
@@ -8,12 +8,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
-import br.com.sistema.dto.security.LoginRequestDTO;
-import br.com.sistema.dto.security.TokenResponseDto;
 import br.com.sistema.exceptions.DadosInvalidosException;
 import br.com.sistema.exceptions.UsuarioNaoEncontradoException;
 import br.com.sistema.repository.UsuarioRepository;
 import br.com.sistema.security.TokenService;
+import br.com.sistema.security.dto.LoginRequestDTO;
+import br.com.sistema.security.dto.TokenResponseDto;
 
 @Service
 public class LoginService {

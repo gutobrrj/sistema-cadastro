@@ -39,10 +39,8 @@ public class SecurityConfig {
 	            .addFilterBefore(filtroCustomizado, UsernamePasswordAuthenticationFilter.class) // Adiciona o filtro JWT personalizado antes do filtro de autenticação padrão do Spring Security
 	            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configura a gestão de sessão como "stateless", indicando que a aplicação não mantém estado de sessão
 	            .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-	                    .requestMatchers(
-	                            "/auth/login", // Permite acesso público ao endpoint de login
-	                            "/auth/refresh").permitAll() // Permite acesso público ao endpoint de refresh token
-	                    .anyRequest().authenticated()) // Exige autenticação para qualquer outra requisição
+	                    .requestMatchers("/auth/login").permitAll() // Permite acesso público ao endpoint de login
+	                    .anyRequest().authenticated()) 				// Exige autenticação para qualquer outra requisição
 	            .cors(cors -> {}) // Habilita o suporte a CORS (Cross-Origin Resource Sharing)
 	            .build(); // Constrói e retorna o objeto SecurityFilterChain configurado
 	}

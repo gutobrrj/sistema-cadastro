@@ -12,9 +12,9 @@ public class Startup {
 		SpringApplication.run(Startup.class, args);
 		
 		// Cria uma senha criptografada
-		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String result = passwordEncoder.encode("26021988");
-		System.out.println("Senha criptografada: " + result);
+//		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//		String result = passwordEncoder.encode("26021988");
+//		System.out.println("Senha criptografada: " + result);
 	}
 
 }

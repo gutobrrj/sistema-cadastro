@@ -1,4 +1,4 @@
-package br.com.sistema.controller;
+package br.com.sistema.security.controller;
 
 import java.util.logging.Logger;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sistema.dto.security.LoginRequestDTO;
-import br.com.sistema.service.LoginService;
+import br.com.sistema.security.dto.LoginRequestDTO;
+import br.com.sistema.security.service.LoginService;
 
 @RestController
 @RequestMapping("/auth")

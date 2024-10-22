@@ -1,6 +1,6 @@
-package br.com.sistema.model.entity;
+package br.com.sistema.model;
 
-import br.com.sistema.model.entity.enums.TipoContato;
+import br.com.sistema.model.enums.TipoContato;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
