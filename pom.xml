@@ -9,7 +9,7 @@
 		<version>3.3.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>br.com.cnsoftware</groupId>
+	<groupId>br.com.sistema</groupId>
 	<artifactId>sistema-cadastro</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Sistema</name>
