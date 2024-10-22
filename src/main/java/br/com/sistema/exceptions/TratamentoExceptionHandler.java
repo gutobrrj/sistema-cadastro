@@ -5,6 +5,7 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,22 +21,13 @@ public class TratamentoExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	// TRATAMENTO PARA O ERRO GENÉRICO 500 - INTERNAL SERVER ERROR
 	@ExceptionHandler(Exception.class)	// Define o tipo de Exceção que filtrará e entrará neste filtro
-	public final ResponseEntity<ExceptionResponse> handleAllExceptions( Exception ex, WebRequest request ) {	// Método retorna um ResponseEntity do tipo ExceptionResponse(Classe que criamos)
+	public ResponseEntity<ExceptionResponse> handleAllExceptions( Exception ex, WebRequest request ) {	// Método retorna um ResponseEntity do tipo ExceptionResponse(Classe que criamos)
 		logger.error(null, ex);	// Loga a exceção com stack trace completo no console
 		ExceptionResponse exceptionResponse = new ExceptionResponse(		// Instancia a classe modelo de resposta que criamos (ExceptionResponse)
 				new Date(), 												// Define a data e horário do erro
-				ex.getMessage(), 											//
-				request.getDescription(false));								// 
-		return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);	// Retonar a classe modelo preenchida e o StatusCode do erro
+				ex.getMessage(), request.getDescription(false));								
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).contentType(MediaType.APPLICATION_JSON).body(exceptionResponse);	// Retonar a classe modelo preenchida e o StatusCode do erro
 	}
-	
-	@ExceptionHandler(AutenticacaoJwtInvalidaException.class)
-    public ResponseEntity<ExceptionResponse> handleAutenticacaoJwtInvalidaException(Exception ex, WebRequest request) {
-		logger.error(null, ex);
-        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
-    }
-	
 	
 	@ExceptionHandler(UsuarioNaoEncontradoException.class)
     public ResponseEntity<ExceptionResponse> handleUsuarioNaoEncontradoException(Exception ex, WebRequest request) {
@@ -50,6 +42,5 @@ public class TratamentoExceptionHandler extends ResponseEntityExceptionHandler {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
-
 
 }
